@@ -4,6 +4,7 @@ import com.theironyard.entities.Photo;
 import com.theironyard.entities.User;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,5 +12,7 @@ import java.util.List;
  */
 public interface PhotoRepository extends CrudRepository<Photo, Integer>{
     List<Photo> findByReceiver(User receiver);
+    List<Photo> findByIsPublicAndSender(boolean isPublic, String username);
+    List<Photo> findBySender(User user);
 
 }

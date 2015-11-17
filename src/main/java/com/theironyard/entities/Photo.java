@@ -25,4 +25,10 @@ public class Photo {
 
     public LocalDateTime accessTime;
 
+
+    public long deleteTime;
+
+    @Column(nullable = false)
+    public boolean isPublic;
+
 }
