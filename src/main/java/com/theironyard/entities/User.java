@@ -14,7 +14,7 @@ public class User {
     public int id;
 
     @Column(nullable = false)
-    public String name;
+    public String username;
 
     @Column(nullable = false)
     public String password;
