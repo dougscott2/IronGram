@@ -17,8 +17,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.security.Timestamp;
 import java.security.spec.InvalidKeySpecException;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
+import java.util.TimerTask;
 
 /**
  * Created by DrScott on 11/17/15.
@@ -96,10 +100,24 @@ public class IronGramController {
         if (username==null){
             throw new Exception("Not logged int");
         }
-
         User user = users.findOneByUsername(username);
+
+        List<Photo> photoList = photos.findByReceiver(user);
+        for (Photo p : photoList){
+            if(p.accessTime==null){
+                p.accessTime = LocalDateTime.now();
+
+                photos.save(p);
+            }else if(p.accessTime.isBefore(LocalDateTime.now().minusSeconds(10))) {
+                photos.delete(p);
+                //File newFile = File.createTempFile("photo", "jpg",  File );
+                File f = new File("public", p.filename);
+                f.delete();
+            }
+        }
         return photos.findByReceiver(user);
     }
+
 
 }
 

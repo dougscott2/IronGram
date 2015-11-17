@@ -24,7 +24,9 @@
 </form>
 <br><br>
 
+
 <div id="photos">
+
 
 </div>
 
@@ -40,8 +42,8 @@
         }
     }
 
-    function getPhotosAjax(){
 
+    function getPhotosAjax(){
      $.get("/photos", getPhotos);
     }
 
@@ -56,7 +58,6 @@
              setInterval(getPhotosAjax, 3000);
         }
     }
-
     $.get("/user", getUser);
 
 </script>
